@@ -22,7 +22,7 @@ jobs:
           
       - run:
           name: Installing CMake
-          command: 'sudo wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4-Linux-x86_64.sh && sh cmake-3.13.4-Linux-x86_64.sh'
+          command: 'sudo apt purge cmake && wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz && tar -zxvf cmake-3.13.4.tar.gz && cd cmake-3.13.4 && ./bootstrap && make && sudo make install'
          
       - run:
           name: Check CMake version
