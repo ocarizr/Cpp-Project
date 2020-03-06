@@ -5,7 +5,7 @@ project(NamedPipe LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(library_name ReadConfig)
+set(library_name ConfigManager)
 
 set(readConfig_headers
     ConfigEnum.h

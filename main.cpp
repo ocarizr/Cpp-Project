@@ -7,8 +7,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "ReadConfig/ReadConfig.h"
-#include "ReadConfig/ReadConfigConcretions.h"
+#include "ConfigManager/ReadConfig.h"
+#include "ConfigManager/ReadConfigConcretions.h"
 
 template <typename T>
 void populate_configs(ConfigManager::Interfaces::IReadConfig<T>* reader)
