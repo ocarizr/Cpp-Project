@@ -8,13 +8,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(library_name ConfigManager)
 
 set(readConfig_headers
+    ConfigManagerLib.h
     ConfigEnum.h
     EnumParser.h
     ConfigurationParser.h
     IReadConfig.h
-    ReadConfig.h
-    ReadConfigConcretions.h
-    ReadConfigCfg.h)
+    Reader.h
+    ReadConfigCfg.h
+    IConfigurationMap.h
+    AppConfig.h)
 
 set(readConfig_sources
     ReadConfigCfg.cpp)

@@ -4,15 +4,15 @@
 
 namespace ConfigManager {
     template<typename T>
-    class Read : public Interfaces::IReadConfig<T>
+    class Reader : public Interfaces::IReadConfig<T>
     {
         Interfaces::IReadConfig<T>* m_config_behavior;
     public:
-        Read() = delete;
-        Read(Interfaces::IReadConfig<T>*&& config) noexcept :
+        Reader() = delete;
+        Reader(Interfaces::IReadConfig<T>*&& config) noexcept :
             m_config_behavior(config) {}
 
-        ~Read<T>()
+        ~Reader<T>()
         {
             delete m_config_behavior;
         }
