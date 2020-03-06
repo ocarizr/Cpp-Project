@@ -34,11 +34,11 @@ jobs:
 
       - run:
           name: Check Ninja version
-          command: 'ninja --version'
+          command: 'sudo ninja --version'
 
       - run:
           name: Build project
-          command: 'mkdir -p Build && cd Build &&  cmake -GNinja ../ && ninja'
+          command: 'sudo mkdir -p Build && cd Build && sudo cmake -GNinja ../ && ninja'
           
       - run:
           name: Installing Valgrind
