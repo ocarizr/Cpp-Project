@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Build project
-          command: 'mkdir Build && cd Build && sudo cmake -GNinja /home/circleci/project && ninja'
+          command: 'mkdir Build && cd Build && sudo cmake -G Ninja .. && ninja'
           
       - run:
           name: Installing Valgrind
