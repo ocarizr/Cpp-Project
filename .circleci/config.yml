@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Build project
-          command: 'cd home/circleci/project && sudo mkdir Build && cd Build && sudo cmake -G Ninja -D CMAKE_CXX_COMPILER=g++-9 .. && sudo ninja'
+          command: 'cd /home/circleci/project && sudo mkdir Build && cd Build && sudo cmake -G Ninja -D CMAKE_CXX_COMPILER=g++-9 .. && sudo ninja'
           
       - run:
           name: Installing Valgrind
