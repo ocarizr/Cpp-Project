@@ -22,7 +22,7 @@ jobs:
           
       - run:
           name: Installing CMake
-          command: 'sudo apt purge cmake && wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz && tar -zxvf cmake-3.13.4.tar.gz && cd cmake-3.13.4 && ./bootstrap && make && sudo make install'
+          command: 'sudo apt purge cmake && sudo wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz && tar -zxvf cmake-3.13.4.tar.gz && cd cmake-3.13.4 && sudo ./bootstrap && sudo make && sudo make install'
          
       - run:
           name: Check CMake version
@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Build project
-          command: 'mkdir Build && cd Build && sudo cmake -G Ninja -D CMAKE_CXX_COMPILER=g++-9 .. && ninja'
+          command: 'cd home/circleci/project && sudo mkdir Build && cd Build && sudo cmake -G Ninja -D CMAKE_CXX_COMPILER=g++-9 .. && sudo ninja'
           
       - run:
           name: Installing Valgrind
