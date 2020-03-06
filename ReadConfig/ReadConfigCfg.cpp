@@ -1,65 +1,62 @@
 #include "ReadConfigCfg.h"
 
-namespace ReadConfig {
-    namespace Concretions {
-        using configMap = std::map<Enums::Configurations, u_int16_t>;
-        using ConfigurationParser = Enums::Parsers::ConfigurationParser;
+namespace ConfigManager::Concretions {
+    using configMap = std::map<Enums::Configurations, u_int16_t>;
+    using ConfigurationParser = Enums::Parsers::ConfigurationParser;
 
-        const configMap ReadConfigCfg::ReadConfigurations() const
+    const configMap ReadConfigCfg::ReadConfigurations() const
+    {
+        configMap result = configMap();
+
+        std::ifstream file;
+        std::string file_path = m_file_path + "/config.cfg";
+        try
         {
-            configMap result = configMap();
+            file.open(file_path);
+            std::string data = std::string();
 
-            std::ifstream file;
-            std::string file_path = m_file_path + "/config.cfg";
-            try
+            if(!file.is_open()) throw;
+
+            Enums::Configurations config_item;
+            unsigned int config_data;
+
+            ConfigurationParser parser = ConfigurationParser();
+
+            while(getline(file, data))
             {
-                file.open(file_path);
-                std::string data = std::string();
-
-                if(!file.is_open()) throw;
-
-                Enums::Configurations config_item;
-                unsigned int config_data;
-
-                ConfigurationParser parser = ConfigurationParser();
-
-                while(getline(file, data))
+                std::stringstream ss(data);
+                std::string token = std::string();
+                int config = 0;
+                while(getline(ss, token, '='))
                 {
-                    std::stringstream ss(data);
-                    std::string token = std::string();
-                    int config = 0;
-                    while(getline(ss, token, '='))
+                    if(config == 0)
                     {
-                        if(config == 0)
-                        {
-                            config_item = parser.ParseSomeEnum(token);
-                        }
-                        else if (config == 1)
-                        {
-                            config_data = std::stoi(token);
-                        }
-                        else
-                        {
-                            // Log invalid config Item
-                        }
-                        ++config;
+                        config_item = parser.ParseSomeEnum(token);
                     }
-
-                    result.emplace(config_item, config_data);
-                    config = 0;
+                    else if (config == 1)
+                    {
+                        config_data = std::stoi(token);
+                    }
+                    else
+                    {
+                        // Log invalid config Item
+                    }
+                    ++config;
                 }
-            }
-            catch (std::exception& e)
-            {
-                // Log exception
-            }
-            catch(...)
-            {
-                // Log unkown error
-            }
 
-            return result;
+                result.emplace(config_item, config_data);
+                config = 0;
+            }
         }
+        catch (std::exception& e)
+        {
+            // Log exception
+        }
+        catch(...)
+        {
+            // Log unkown error
+        }
+
+        return result;
     }
 }
-

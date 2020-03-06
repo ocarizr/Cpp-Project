@@ -11,9 +11,9 @@
 #include "ReadConfig/ReadConfigConcretions.h"
 
 template <typename T>
-void populate_configs(ReadConfig::Interfaces::IReadConfig<T>* reader)
+void populate_configs(ConfigManager::Interfaces::IReadConfig<T>* reader)
 {
-    using namespace ReadConfig;
+    using namespace ConfigManager;
     auto configs = reader->ReadConfigurations();
 
     for(const auto& config : configs)
@@ -33,8 +33,8 @@ void populate_configs(ReadConfig::Interfaces::IReadConfig<T>* reader)
 
 int main()
 {
-    auto config_reader = ReadConfig::Read(
-                std::move(new ReadConfig::Concretions::ReadConfigCfg("Config")));
+    auto config_reader = ConfigManager::Read(
+                std::move(new ConfigManager::Concretions::ReadConfigCfg("Config")));
     populate_configs(&config_reader);
 
     return 0;

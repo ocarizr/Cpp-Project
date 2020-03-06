@@ -2,7 +2,7 @@
 #define READCONFIG_H
 #include "IReadConfig.h"
 
-namespace ReadConfig {
+namespace ConfigManager {
     template<typename T>
     class Read : public Interfaces::IReadConfig<T>
     {
