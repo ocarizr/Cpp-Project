@@ -9,14 +9,15 @@ namespace ReadConfig {
         Interfaces::IReadConfig<T>* m_config_behavior;
     public:
         Read() = delete;
-        explicit Read(Interfaces::IReadConfig<T>*&& config) noexcept : m_config_behavior(config) {}
+        Read(Interfaces::IReadConfig<T>*&& config) noexcept :
+            m_config_behavior(config) {}
 
-        ~Read()
+        ~Read<T>()
         {
             delete m_config_behavior;
         }
 
-        const virtual std::map<Enums::Configurations, T> ReadConfigurations() const
+        const std::map<Enums::Configurations, T> ReadConfigurations() const override
         {
             return m_config_behavior->ReadConfigurations();
         }

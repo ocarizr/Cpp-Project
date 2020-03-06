@@ -11,9 +11,7 @@ namespace ReadConfig {
         protected:
             std::string m_file_path;
         public:
-            IReadConfig(std::string f) noexcept : m_file_path(f){}
-            virtual ~IReadConfig();
-
+            virtual ~IReadConfig<T>() {}
             const virtual std::map<Enums::Configurations, T> ReadConfigurations() const = 0;
         };
     }

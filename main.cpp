@@ -34,8 +34,7 @@ void populate_configs(ReadConfig::Interfaces::IReadConfig<T>* reader)
 int main()
 {
     auto config_reader = ReadConfig::Read(
-                std::move(
-                    new ReadConfig::Concretions::ReadConfigCfg("config")));
+                std::move(new ReadConfig::Concretions::ReadConfigCfg("Config")));
     populate_configs(&config_reader);
 
     return 0;

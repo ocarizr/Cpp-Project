@@ -10,13 +10,14 @@ namespace ReadConfig {
         class ReadConfigCfg : public Interfaces::IReadConfig<u_int16_t>
         {
         public:
-            explicit ReadConfigCfg(std::string file_path) : IReadConfig(file_path) {}
-            ~ReadConfigCfg() override;
+            explicit ReadConfigCfg(std::string file_path)
+            {
+                m_file_path = file_path;
+            }
 
             const std::map<Enums::Configurations, u_int16_t> ReadConfigurations() const override;
         };
     }
 }
-
 
 #endif // READCONFIGCFG_H
