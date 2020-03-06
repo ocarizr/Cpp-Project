@@ -30,7 +30,7 @@ jobs:
 
       - run:
           name: Installing Ninja
-          command: 'sudo apt-get -y update && sudo apt-get -y install ninja'
+          command: 'sudo apt-get -y update && sudo apt-get -y install ninja-build'
 
       - run:
           name: Build project
