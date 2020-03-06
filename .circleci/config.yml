@@ -1,0 +1,59 @@
+version: 2
+
+jobs:
+  build:
+    branches:
+      only:
+        - master
+        
+    machine:
+      image: ubuntu-1604:201903-01
+      
+    steps:
+      - checkout
+         
+      - run:
+          name: Installing GCC
+          command: 'sudo apt-get -y update && sudo apt-get -y install software-properties-common && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && sudo apt-get -y update && sudo apt-get -y install -y gcc g++ libtool autoconf automake cmake gcc-9 g++-9'
+         
+      - run:
+          name: Check GCC version
+          command: 'export CC=gcc-9 && export CXX=g++-9 && $CXX --version'
+          
+      - run:
+          name: Installing CMake
+          command: 'sudo apt-get -y update && sudo apt-get -y install cmake'
+         
+      - run:
+          name: Check CMake version
+          command: 'cmake --version'
+
+      - run:
+          name: Installing Ninja
+          command: 'sudo apt-get -y update && sudo apt-get -y install ninja'
+
+      - run:
+          name: Check Ninja version
+          command: 'ninja --version'
+
+      - run:
+          name: Build project
+          command: 'mkdir -p Build && cd Build &&  cmake -GNinja ../ && ninja'
+          
+      - run:
+          name: Installing Valgrind
+          command: 'sudo apt-get update && sudo apt-get install -y valgrind
+          && sudo wget sourceware.org/pub/valgrind/valgrind-3.13.0.tar.bz2
+          && tar -xjf valgrind-3.13.0.tar.bz2 && cd valgrind-3.13.0/
+          && ./configure && make
+          && sudo make install
+          && sudo whereis valgrind
+          && sudo update-alternatives --install /usr/bin/valgrind valgrind /usr/local/bin/valgrind 1 --force'
+          
+      - run:
+         name: Check Valgrind Version
+         command: 'valgrind --version'
+          
+      - run:
+          name: Valgrind Test
+          command: 'valgrind --run-cxx-freeres=yes --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./CppProject'

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(project_name
-    NamedPipe)
+    CppProject)
 set(project_sources
     main.cpp)
 
