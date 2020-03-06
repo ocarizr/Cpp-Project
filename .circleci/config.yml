@@ -33,10 +33,6 @@ jobs:
           command: 'sudo apt-get -y update && sudo apt-get -y install ninja'
 
       - run:
-          name: Check Ninja version
-          command: 'sudo ninja --version'
-
-      - run:
           name: Build project
           command: 'sudo mkdir -p Build && cd Build && sudo cmake -GNinja ../ && ninja'
           
