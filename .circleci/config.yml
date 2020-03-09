@@ -36,20 +36,5 @@ jobs:
           name: Build project
           command: 'cd /home/circleci/project && sudo mkdir Build && cd Build && sudo cmake -G Ninja -D CMAKE_CXX_COMPILER=g++-9 .. && sudo ninja'
           
-      - run:
-          name: Installing Valgrind
-          command: 'sudo apt-get update && sudo apt-get install -y valgrind
-          && sudo wget sourceware.org/pub/valgrind/valgrind-3.15.0.tar.bz2
-          && tar -xjf valgrind-3.15.0.tar.bz2 && cd valgrind-3.15.0/
-          && ./configure && make
-          && sudo make install
-          && sudo whereis valgrind
-          && sudo update-alternatives --install /usr/bin/valgrind valgrind /usr/local/bin/valgrind 1 --force'
-          
-      - run:
-         name: Check Valgrind Version
-         command: 'valgrind --version'
-
-      - run:
-         name: Valgrind Test
-         command: 'valgrind --run-cxx-freeres=yes --run-libc-freeres=yes --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 /home/circleci/project/Build/CppProject'
+      - store_artifacts:
+          path: /home/circleci/project/Build
