@@ -11,7 +11,7 @@ namespace ConfigManager::Interfaces {
         std::string m_file_path;
     public:
         virtual ~IReadConfig<T>() {}
-        const virtual std::map<Enums::Configurations, T> ReadConfigurations() const = 0;
+        const virtual std::map<Enums::Configurations, T> ReadConfigurations() = 0;
     };
 }
 #endif // IREADCONFIG_H

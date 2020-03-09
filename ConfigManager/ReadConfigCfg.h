@@ -14,7 +14,7 @@ namespace ConfigManager::Concretions {
             m_file_path = file_path;
         }
 
-        const std::map<Enums::Configurations, std::string> ReadConfigurations() const override;
+        const std::map<Enums::Configurations, std::string> ReadConfigurations() override;
     };
 }
 

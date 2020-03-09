@@ -17,7 +17,7 @@ namespace ConfigManager {
             delete m_config_behavior;
         }
 
-        const std::map<Enums::Configurations, T> ReadConfigurations() const override
+        const std::map<Enums::Configurations, T> ReadConfigurations() override
         {
             return m_config_behavior->ReadConfigurations();
         }

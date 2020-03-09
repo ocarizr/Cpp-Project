@@ -4,7 +4,7 @@ namespace ConfigManager::Concretions {
     using configMap = std::map<Enums::Configurations, std::string>;
     using ConfigurationParser = Enums::Parsers::ConfigurationParser;
 
-    const configMap ReadConfigCfg::ReadConfigurations() const
+    const configMap ReadConfigCfg::ReadConfigurations()
     {
         configMap result = configMap();
 
