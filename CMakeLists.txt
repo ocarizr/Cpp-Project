@@ -20,7 +20,7 @@ set(library_names
 target_link_libraries(${project_name} LINK_PUBLIC ${library_names})
 
 set(config_directory
-    ${CMAKE_CURRENT_BINARY_DIR}/Congig)
+    ${CMAKE_CURRENT_BINARY_DIR}/Config)
 
 file(MAKE_DIRECTORY ${config_directory})
 
