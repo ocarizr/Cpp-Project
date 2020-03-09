@@ -6,7 +6,7 @@
 #include "IReadConfig.h"
 #include "ConfigurationParser.h"
 namespace ConfigManager::Concretions {
-    class ReadConfigCfg : public Interfaces::IReadConfig<u_int16_t>
+    class ReadConfigCfg : public Interfaces::IReadConfig<std::string>
     {
     public:
         explicit ReadConfigCfg(std::string file_path)
@@ -14,7 +14,7 @@ namespace ConfigManager::Concretions {
             m_file_path = file_path;
         }
 
-        const std::map<Enums::Configurations, u_int16_t> ReadConfigurations() const override;
+        const std::map<Enums::Configurations, std::string> ReadConfigurations() const override;
     };
 }
 

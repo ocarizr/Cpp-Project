@@ -18,3 +18,12 @@ set(library_names
     ConfigManager)
 
 target_link_libraries(${project_name} LINK_PUBLIC ${library_names})
+
+set(config_directory
+    ${CMAKE_CURRENT_BINARY_DIR}/Congig)
+
+file(MAKE_DIRECTORY ${config_directory})
+
+configure_file(${CMAKE_SOURCE_DIR}/config.cfg
+               ${CMAKE_BINARY_DIR}/Config/config.cfg
+               COPYONLY)

@@ -49,3 +49,7 @@ jobs:
       - run:
          name: Check Valgrind Version
          command: 'valgrind --version'
+
+      - run:
+         name: Valgrind Test
+         command: 'valgrind --run-cxx-freeres=yes --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 CppProject'

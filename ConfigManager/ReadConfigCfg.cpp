@@ -1,7 +1,7 @@
 #include "ReadConfigCfg.h"
 
 namespace ConfigManager::Concretions {
-    using configMap = std::map<Enums::Configurations, u_int16_t>;
+    using configMap = std::map<Enums::Configurations, std::string>;
     using ConfigurationParser = Enums::Parsers::ConfigurationParser;
 
     const configMap ReadConfigCfg::ReadConfigurations() const
@@ -18,7 +18,7 @@ namespace ConfigManager::Concretions {
             if(!file.is_open()) throw;
 
             Enums::Configurations config_item;
-            unsigned int config_data;
+            std::string config_data;
 
             ConfigurationParser parser = ConfigurationParser();
 
@@ -35,7 +35,7 @@ namespace ConfigManager::Concretions {
                     }
                     else if (config == 1)
                     {
-                        config_data = std::stoi(token);
+                        config_data = token;
                     }
                     else
                     {

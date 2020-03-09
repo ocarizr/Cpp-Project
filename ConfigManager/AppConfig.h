@@ -9,22 +9,22 @@
 
 namespace ConfigManager::Configurations
 {
-    class AppConfig : public IConfigurationMap<Enums::Configurations, u_int16_t>
+    class AppConfig : public IConfigurationMap<Enums::Configurations, std::string>
     {
-        void SetConfigurationMap(std::map<Enums::Configurations, u_int16_t> configs) noexcept override
+        void SetConfigurationMap(std::map<Enums::Configurations, std::string> configs) noexcept override
         {
             m_configs = std::map(configs);
         }
 
     public:
-        AppConfig() { m_configs = std::map<Enums::Configurations, u_int16_t>(); }
+        AppConfig() { m_configs = std::map<Enums::Configurations, std::string>(); }
 
-        explicit AppConfig(const std::map<Enums::Configurations, u_int16_t> data)
+        explicit AppConfig(const std::map<Enums::Configurations, std::string> data)
         {
             SetConfigurationMap(data);
         }
 
-        std::map<Enums::Configurations, u_int16_t> GetConfigurationMap() const noexcept override
+        std::map<Enums::Configurations, std::string> GetConfigurationMap() const noexcept override
         {
             return m_configs;
         }
@@ -34,7 +34,7 @@ namespace ConfigManager::Configurations
             return m_configs.find(key) != m_configs.end();
         }
 
-        u_int16_t GetConfiguration(Enums::Configurations key) const noexcept override
+        std::string GetConfiguration(Enums::Configurations key) const noexcept override
         {
             auto it_value = m_configs.find(key);
             return it_value != m_configs.end() ? it_value->second : 0;
