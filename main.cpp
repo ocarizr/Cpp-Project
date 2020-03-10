@@ -8,17 +8,22 @@
 #include <unistd.h>
 
 #include "ConfigManager/ConfigManagerLib.h"
+#include "LogManager/LogManagerLib.h"
 
 int main()
 {
-    using namespace ConfigManager;
-    auto config_storage = Configurations::AppConfig(
-                Reader(std::move(new Concretions::ReadConfigCfg("Config")))
+    auto logger = LogManager::Logger(
+                std::move(new LogManager::Concretions::SpdLogger(
+                              spdlog::basic_logger_mt("log", "Log/log.txt"))));
+
+    auto config_storage = ConfigManager::Configurations::AppConfig(
+                ConfigManager::Reader(std::move(new ConfigManager::Concretions::ReadConfigCfg("Config")))
                 .ReadConfigurations());
 
     for(auto& config : config_storage.GetConfigurationMap())
     {
         std::cout << config.second << std::endl;
+        logger.LogInfo(config.second);
     }
 
     return 0;

@@ -5,6 +5,12 @@ project(NamedPipe LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(CMAKE_COMPILER_IS_GNUCXX)
+    add_compile_options(-Wall)
+    add_compile_options(-Wextra)
+    add_compile_options(-O3)
+endif(CMAKE_COMPILER_IS_GNUXX)
+
 set(project_name
     CppProject)
 set(project_sources
@@ -13,11 +19,10 @@ set(project_sources
 add_executable(${project_name} ${project_sources})
 
 add_subdirectory(ConfigManager/)
+add_subdirectory(LogManager/)
 
-set(library_names
-    ConfigManager)
-
-target_link_libraries(${project_name} LINK_PUBLIC ${library_names})
+target_link_libraries(${project_name} LINK_PUBLIC ConfigManager)
+target_link_libraries(${project_name} LINK_PUBLIC LogManager)
 
 set(config_directory
     ${CMAKE_CURRENT_BINARY_DIR}/Config)
