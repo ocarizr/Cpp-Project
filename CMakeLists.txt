@@ -15,8 +15,10 @@ set(project_name
     CppProject)
 set(project_sources
     main.cpp)
+set(project_headers
+    ClientFeederApplication.h)
 
-add_executable(${project_name} ${project_sources})
+add_executable(${project_name} ${project_sources} ${project_headers})
 
 add_subdirectory(ConfigManager/)
 add_subdirectory(LogManager/)

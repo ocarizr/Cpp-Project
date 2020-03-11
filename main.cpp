@@ -1,5 +1,4 @@
-#include "ConfigManager/ConfigManagerLib.h"
-#include "LogManager/LogManagerLib.h"
+#include "ClientFeederApplication.h"
 
 int main()
 {
@@ -12,10 +11,7 @@ int main()
                                       logger)
                 .ReadConfigurations());
 
-    for(auto& config : config_storage.GetConfigurationMap())
-    {
-        logger.LogInfo(config.second);
-    }
+    auto application = ClientFeederApplication(logger, config_storage);
 
-    return 0;
+    return application.Start();
 }
