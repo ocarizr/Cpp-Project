@@ -17,7 +17,7 @@ namespace ConfigManager {
         Reader(Interfaces::IReadConfig<T>*&& config, Logger& logger) noexcept :
             m_config_behavior(config), m_logger(&logger) {}
 
-        ~Reader<T>()
+        ~Reader()
         {
             delete m_config_behavior;
         }

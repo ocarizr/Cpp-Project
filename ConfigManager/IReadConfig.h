@@ -10,7 +10,7 @@ namespace ConfigManager::Interfaces {
     protected:
         std::string m_file_path;
     public:
-        virtual ~IReadConfig<T>() {}
+        virtual ~IReadConfig() {}
         const virtual std::map<Enums::Configurations, T> ReadConfigurations() = 0;
     };
 }
