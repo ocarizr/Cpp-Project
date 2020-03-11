@@ -16,7 +16,10 @@ set(project_name
 set(project_sources
     main.cpp)
 set(project_headers
-    ClientFeederApplication.h)
+    ClientFeederApplication.h
+    ChannelThreads.h
+    IChannel.h
+    Channel.h)
 
 add_executable(${project_name} ${project_sources} ${project_headers})
 
