@@ -9,7 +9,7 @@ namespace LogManager::Interfaces {
     protected:
         T m_log;
     public:
-        virtual ~ILogger<T>() {}
+        virtual ~ILogger() {}
         virtual void LogInfo(const std::string& message) = 0;
         virtual void LogWarning(const std::string& message) = 0;
         virtual void LogError(const std::string& message) = 0;
