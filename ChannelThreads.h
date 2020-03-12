@@ -16,9 +16,9 @@ public:
     {
         int channel_count = std::count_if(configs.begin(), configs.end(), [](auto& config) { return config.second.find("Channel"); });
 
-        for(uint16_t i = 0; i < channel_count; ++i)
+        for(uint16_t i = 0; i < channel_count;)
         {
-            StartChannel(logger);
+            if(StartChannel(logger)) ++i;
         }
     }
 
@@ -40,31 +40,36 @@ public:
         }
     }
 
-    bool StartChannel(LogManager::Logger<V>& logger)
+    [[nodiscard]] bool StartChannel(LogManager::Logger<V>& logger)
     {
         bool ret = true;
 
         try
         {
-        auto channel = Channel(logger, 0); // Channels also needs to receive a struct with its configs
-        m_channels.push_back(channel);
+            auto channel = Channel(logger, 0); // Channels also needs to receive a struct with its configs
+            m_channels.push_back(std::move(channel));
 
-        std::thread thread([&channel](){ channel.Start(); });
-        m_channel_threads.push_back(std::move(thread));
+            auto c = m_channels.rbegin();
+
+            auto func = [&c]()
+            {
+                c->Start();
+            };
+
+            m_channel_threads.emplace_back(std::move(func));
+
         }
         catch(std::exception& e)
         {
-            char log_msg[LOG_MESSAGE_BUFFER_SIZE];
-            snprintf(log_msg, LOG_MESSAGE_BUFFER_SIZE, "%s - %s", __func__, e.what());
-            logger.LogError(log_msg);
+            char* what;
+            strcpy(what, e.what());
+            logger.LogError(logger.GetLogMessage("[%s] - %s", __func__, what));
 
             ret = false;
         }
         catch(...)
         {
-            char log_msg[LOG_MESSAGE_BUFFER_SIZE];
-            snprintf(log_msg, LOG_MESSAGE_BUFFER_SIZE, "%s - %s", __func__, "Unknown Error");
-            logger.LogError(log_msg);
+            logger.LogError(logger.GetLogMessage("[%s] - Unknown Error", __func__));
 
             ret = false;
         }

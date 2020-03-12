@@ -14,9 +14,9 @@ protected:
     uint16_t m_ID;
 public:
     IChannel() = delete;
-    IChannel(LogManager::Logger<T> logger, uint16_t id) : m_logger(logger), m_ID(id) {}
+    IChannel(LogManager::Logger<T>& logger, uint16_t id) : m_logger(logger), m_ID(id) {}
     virtual ~IChannel(){}
-    virtual int Start() = 0;
+    virtual void Start() = 0;
     virtual bool ReadData() = 0;
     virtual bool GetState() = 0;
     LogManager::Logger<T> GetLogger() { return m_logger; }

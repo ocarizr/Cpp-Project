@@ -8,7 +8,11 @@ class Channel : public IChannel<std::shared_ptr<spdlog::logger>>
 public:
     Channel(LogManager::Logger<std::shared_ptr<spdlog::logger>>& logger, uint16_t id) : IChannel(logger, id) {}
 
-    int Start() override { return 0; }
+    void Start() override
+    {
+        m_logger.LogInfo(m_logger.GetLogMessage("[%s] - Channel %d Starting", __func__, m_ID));
+    }
+
     bool ReadData() override { return true; }
     bool GetState() override { return true; }
 };
