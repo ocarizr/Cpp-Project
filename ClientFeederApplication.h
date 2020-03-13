@@ -1,6 +1,7 @@
 #ifndef CLIENTFEEDERAPPLICATION_H
 #define CLIENTFEEDERAPPLICATION_H
 #include <thread>
+#include <assert.h>
 
 #include "ChannelThreads.h"
 
@@ -41,13 +42,18 @@ public:
         {
             auto channel_threads = ChannelThreads(m_configs.GetConfigurationMap(), m_logger);
 
+#ifdef DEBUG_END_PROGRAM
             int i = 0;
+#endif
+
             while (m_continue.load())
             {
-                 std::this_thread::sleep_for(std::chrono::seconds(10));
-
+                std::this_thread::sleep_for(std::chrono::seconds(10));
+                channel_threads.VerifyChannelHeatlh();
+#ifdef DEBUG_END_PROGRAM
                  ++i;
-                 if(i == 10) Stop(); // remove this after valgrind test
+                 if(i == 10) Stop();
+#endif
             }
 
             m_logger.LogInfo(m_logger.GetLogMessage("[%s] - Closing Application", __func__));

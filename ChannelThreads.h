@@ -14,7 +14,11 @@ class ChannelThreads
 public:
     ChannelThreads(const std::map<T, U>& configs, LogManager::Logger<V>& logger)
     {
-        int channel_count = std::count_if(configs.begin(), configs.end(), [](auto& config) { return config.second.find("Channel"); });
+        int channel_count = std::count_if(configs.begin(), configs.end(),
+                                          [](auto& config)
+                                          {
+                                                return config.second.find("Channel") != std::string::npos;
+                                          });
 
         for(uint16_t i = 0; i < channel_count;)
         {
@@ -33,7 +37,11 @@ public:
                 m_channel_threads[i].join();
                 m_channels.erase(channel);
 
-                StartChannel(temp.GetLogger());
+                if(StartChannel(temp.GetLogger()))
+                {
+                    --i;
+                    --channel;
+                }
             }
 
             ++i;

@@ -11,7 +11,5 @@ int main()
                                       logger)
                 .ReadConfigurations());
 
-    auto application = ClientFeederApplication(logger, config_storage);
-
-    return application.Start();
+    return ClientFeederApplication(logger, config_storage).Start();
 }
