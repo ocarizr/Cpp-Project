@@ -30,21 +30,19 @@ namespace ConfigManager {
             {
                 result = m_config_behavior->ReadConfigurations();
 
-                char log_msg[LOG_MESSAGE_BUFFER_SIZE];
-                snprintf(log_msg, LOG_MESSAGE_BUFFER_SIZE, "%s - %s", __func__, "Configuration successfuly readed");
-                m_logger->LogInfo(log_msg);
+                m_logger->LogInfo(
+                            m_logger->GetLogMessage(
+                                "[%s] - Configuration successfuly readed", __func__));
             }
             catch (std::exception& e)
             {
-                char log_msg[LOG_MESSAGE_BUFFER_SIZE];
-                snprintf(log_msg, LOG_MESSAGE_BUFFER_SIZE, "%s - %s", __func__, e.what());
-                m_logger->LogError(log_msg);
+                char* what;
+                strcpy(what, e.what());
+                m_logger->LogError(m_logger->GetLogMessage("[%s] - %s", __func__, what));
             }
             catch(...)
             {
-                char log_msg[LOG_MESSAGE_BUFFER_SIZE];
-                snprintf(log_msg, LOG_MESSAGE_BUFFER_SIZE, "%s - %s", __func__, "Unknown error");
-                m_logger->LogError(log_msg);
+                m_logger->LogError(m_logger->GetLogMessage("[%s] - Unknown error", __func__));
             }
 
             return result;

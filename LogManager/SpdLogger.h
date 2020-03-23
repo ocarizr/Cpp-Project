@@ -9,6 +9,7 @@ namespace LogManager::Concretions {
     {
     public:
         SpdLogger(std::shared_ptr<spdlog::logger> logger);
+
         void LogInfo(const std::string& message) override;
         void LogWarning(const std::string& message) override;
         void LogError(const std::string& message) override;
